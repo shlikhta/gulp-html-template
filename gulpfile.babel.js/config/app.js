@@ -1,14 +1,15 @@
+import news from '../data/news.json';
 const isProd = process.argv.includes('--production');
 const isDev = !isProd;
 
-module.exports = {
+export default {
   isProd: isProd,
   isDev: isDev,
   htmlmin: {
     collapseWhitespace: isProd,
   },
   pug: {
-    data: { news: require('../data/news.json') },
+    data: { news: news },
   },
   webpack: {
     mode: isProd ? 'production' : 'development',
