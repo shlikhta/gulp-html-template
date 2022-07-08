@@ -1,0 +1,9 @@
+.title {
+    text-transform: uppercase;
+    .sub {
+        font-weight: 700;
+    }
+    @include ph {
+        text-align: center;
+    }
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    @@include("chunk/header.html")
+
+    <h1>Home Page!!!</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam
+      deserunt perspiciatis. Autem itaque reprehenderit temporibus. Assumenda
+      consequuntur delectus, dignissimos dolor enim fugit illum, mollitia
+      placeat quibusdam quo ratione sed? !!!
+    </p>
+
+    @@loop("chunk/new-item.html", "../../data/news.json")
+    @@include("chunk/footer.html")
+  </body>
+</html>
