@@ -27,6 +27,7 @@ const watcher = () => {
 
 const build = series(clear, parallel(pug, scss, js, img, font));
 const dev = series(build, parallel(watcher, server));
+
 // tasks
 exports.pug = pug;
 exports.scss = scss;
