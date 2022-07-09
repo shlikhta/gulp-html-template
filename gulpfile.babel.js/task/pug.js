@@ -5,11 +5,6 @@ import path from '../config/path.js';
 import app from '../config/app.js';
 
 // plugin
-// import plumber from 'gulp-plumber';
-// import notify from 'gulp-notify';
-// import pug from 'gulp-pug';
-// import beautify from 'gulp-beautify';
-// import webpHtml from 'gulp-webp-html-nosvg';
 import loadPlugins from 'gulp-load-plugins';
 const gp = loadPlugins();
 

@@ -1,31 +1,29 @@
-const { src, dest } = require('gulp');
+import gulp from 'gulp';
 
 // config
-const path = require('../config/path.js');
-const app = require('../config/app.js');
+import path from '../config/path.js';
+import app from '../config/app.js';
 
 // plugin
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
-const newer = require('gulp-newer');
-const fonter = require('gulp-fonter-unx');
-const ttf2woff2 = require('gulp-ttf2woff2');
+import loadPlugins from 'gulp-load-plugins';
+import fonter from 'gulp-fonter-unx';
+const gp = loadPlugins();
 
-const font = () => {
-  return src(path.font.src)
+export default () => {
+  return gulp
+    .src(path.font.src)
     .pipe(
-      plumber({
-        errorHandler: notify.onError((error) => ({
+      gp.plumber({
+        errorHandler: gp.notify.onError((error) => ({
           title: 'Font',
           message: error.message,
         })),
       })
     )
-    .pipe(newer(path.font.dest))
+    .pipe(gp.newer(path.font.dest))
+    .pipe(gp.ttf2woff2())
+    .pipe(gulp.dest(path.font.dest))
+    .pipe(gulp.src(path.font.src))
     .pipe(fonter(app.fonter))
-    .pipe(dest(path.font.dest))
-    .pipe(ttf2woff2())
-    .pipe(dest(path.font.dest));
+    .pipe(gulp.dest(path.font.dest));
 };
-
-module.exports = font;

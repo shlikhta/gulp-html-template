@@ -1,26 +1,17 @@
 const pathSrc = './src';
-const pathDest = './public';
+const pathRoot = './public';
+const pathDest = './public/assets';
 
 export default {
-  root: pathDest,
-  html: {
-    src: pathSrc + '/html/*.html  ',
-    watch: pathSrc + '/html/**/*.html',
-    dest: pathDest,
-  },
+  root: pathRoot,
   pug: {
     src: pathSrc + '/pug/*.pug  ',
     watch: pathSrc + '/pug/**/*.pug',
-    dest: pathDest,
-  },
-  css: {
-    src: pathSrc + '/css/*.css  ',
-    watch: pathSrc + '/css/**/*.css',
-    dest: pathDest + '/css',
+    dest: pathRoot,
   },
   scss: {
-    src: pathSrc + '/sass/*.{sass,scss}  ',
-    watch: pathSrc + '/sass/**/*.{sass,scss}',
+    src: pathSrc + '/scss/*.{sass,scss}  ',
+    watch: pathSrc + '/scss/**/*.{sass,scss}',
     dest: pathDest + '/css',
   },
   js: {
@@ -36,6 +27,6 @@ export default {
   font: {
     src: pathSrc + '/font/*.ttf',
     watch: pathSrc + '/font/**/*.ttf',
-    dest: pathDest + '/font/',
+    dest: pathDest + '/font',
   },
 };

@@ -1,46 +1,37 @@
-const { src, dest } = require('gulp');
+import gulp from 'gulp';
+import sass from 'sass';
 
 // config
-const path = require('../config/path.js');
-const app = require('../config/app.js');
+import path from '../config/path.js';
+import app from '../config/app.js';
 
 // plugin
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
-const autoprefixer = require('gulp-autoprefixer');
-const csso = require('gulp-csso');
-const rename = require('gulp-rename');
-const size = require('gulp-size');
-const shorthand = require('gulp-shorthand');
-const groupCssMediaQueries = require('gulp-group-css-media-queries');
-const sass = require('gulp-sass')(require('sass'));
-const sassGlob = require('gulp-sass-glob');
-const webpCss = require('gulp-webp-css');
-const beautify = require('gulp-beautify');
+import loadPlugins from 'gulp-load-plugins';
+const gp = loadPlugins();
+const scss = gp.sass(sass);
 
-const scss = () => {
-  return src(path.scss.src, { sourcemaps: app.isDev })
+export default () => {
+  return gulp
+    .src(path.scss.src, { sourcemaps: app.isDev })
     .pipe(
-      plumber({
-        errorHandler: notify.onError((error) => ({
+      gp.plumber({
+        errorHandler: gp.notify.onError((error) => ({
           title: 'SCSS',
           message: error.message,
         })),
       })
     )
-    .pipe(sassGlob())
-    .pipe(sass())
-    .pipe(webpCss())
-    .pipe(autoprefixer())
-    .pipe(shorthand())
-    .pipe(groupCssMediaQueries())
-    .pipe(beautify.css(app.beautifyCSS))
-    .pipe(size({ title: 'main.css' }))
-    .pipe(dest(path.css.dest, { sourcemaps: app.isDev }))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(csso())
-    .pipe(size({ title: 'main.min.css' }))
-    .pipe(dest(path.scss.dest, { sourcemaps: app.isDev }));
+    .pipe(gp.sassGlob())
+    .pipe(scss())
+    .pipe(gp.webpCss())
+    .pipe(gp.autoprefixer())
+    .pipe(gp.shorthand())
+    .pipe(gp.groupCssMediaQueries())
+    .pipe(gp.beautify.css(app.beautifyCSS))
+    .pipe(gp.size({ title: 'main.css' }))
+    .pipe(gulp.dest(path.scss.dest, { sourcemaps: app.isDev }))
+    .pipe(gp.rename({ suffix: '.min' }))
+    .pipe(gp.csso())
+    .pipe(gp.size({ title: 'main.min.css' }))
+    .pipe(gulp.dest(path.scss.dest, { sourcemaps: app.isDev }));
 };
-
-module.exports = scss;
